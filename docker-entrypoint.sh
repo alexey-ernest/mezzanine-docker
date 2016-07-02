@@ -33,4 +33,10 @@ sed -i "s#.*\"PORT\": \"\",.*#\"PORT\": \"${POSTGRES_PORT}\",#g" /${PROJECT_NAME
 sed -i "s#.*\"USER\": \"\",.*#\"USER\": \"${POSTGRES_USER}\",#g" /${PROJECT_NAME}/${PROJECT_NAME}/local_settings.py
 sed -i "s#.*\"PASSWORD\": \"\",.*#\"PASSWORD\": \"${PASSWORD}\",#g" /${PROJECT_NAME}/${PROJECT_NAME}/local_settings.py
 
-exec "$@"
+# Run server
+if [ "$GENERATE_DB" == "true" -o "$GENERATE_DB" == "TRUE" ]; then
+  exec python manage.py createdb --noinput && \
+    python manage.py runserver 0.0.0.0:8000
+else
+  exec python manage.py runserver 0.0.0.0:8000
+fi
