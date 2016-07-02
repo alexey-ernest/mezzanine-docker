@@ -25,8 +25,3 @@ EXPOSE 8000
 CMD python manage.py createdb --noinput && \
     #python manage.py collectstatic --noinput && \
     python manage.py runserver 0.0.0.0:8000
-
-# Prepare env vars and start app
-#ADD docker-entrypoint.sh /project/docker-entrypoint.sh
-#RUN chmod +x ./docker-entrypoint.sh
-#ENTRYPOINT ["./docker-entrypoint.sh"]
